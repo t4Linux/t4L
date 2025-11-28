@@ -1,0 +1,13 @@
+[Unit]
+Description=Host clipboard -> file (h2v.txt)
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=/tmp/.X11-unix/X*
+
+[Service]
+ExecStart=%h/.local/bin/host_clip_to_file.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,12 @@
+# wklej w terminalu, to wygeneruje plik dla ;aa
+
+python3 - <<'PY'
+import os, itertools, pathlib
+out  = pathlib.Path(os.path.expanduser("~/.config/ranger/2letter-bgo.conf"))
+chars = "abcdefghijklmnopqrstuvwxyz"
+lines = [f"map ;{a}{b} bgo {a}{b}" for a,b in itertools.product(chars, repeat=2)]
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text("\n".join(lines) + "\n")
+print("Written:", out)
+PY
+

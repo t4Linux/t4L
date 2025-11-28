@@ -1,0 +1,16 @@
+[Unit]
+Description=file (h2v.txt) -> VM Wayland clipboard
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStartPre=/usr/bin/mkdir -p /home/dd/HOST/files/clip
+ExecStartPre=/usr/bin/touch /home/dd/HOST/files/clip/h2v.txt
+ExecStart=%h/.local/bin/file_to_vm_wl_clip.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Funkcja do konwersji mil na kilometry
+convert_miles_to_km() {
+    local miles=$1
+    local km=$(echo "$miles * 1.60934" | bc -l)
+    echo "$miles mil to około $km km"
+}
+
+# Sprawdzenie, czy podano argument
+if [ -z "$1" ]; then
+    echo "Użycie: $0 <liczba_mil>"
+    exit 1
+fi
+
+convert_miles_to_km "$1"
+

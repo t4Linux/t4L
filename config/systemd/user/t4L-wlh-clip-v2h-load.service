@@ -1,0 +1,17 @@
+[Unit]
+Description=file (h2v.txt) -> VM clipboard
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStartPre=/usr/bin/mkdir -p /home/donald/Work/JDG/PLK/files/clip
+ExecStartPre=/usr/bin/touch /home/donald/Work/JDG/PLK/files/clip/v2h.txt
+ExecStart=/usr/bin/bash -lc 'set -euo pipefail; export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-%t}"; if [ -z "${WAYLAND_DISPLAY:-}" ]; then sock=$(ls -1 "$XDG_RUNTIME_DIR"/wayland-* 2>/dev/null | head -n1) || { echo "No Wayland socket yet"; exit 1; }; export WAYLAND_DISPLAY="$(basename "$sock")"; fi; exec %h/.local/bin/t4L-clip-wlh-file-to-clip.sh'
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=default.target
+

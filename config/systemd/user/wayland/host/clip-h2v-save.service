@@ -1,0 +1,14 @@
+[Unit]
+Description=HOST Wayland clipboard -> file (h2v.txt)
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStart=%h/.local/bin/host_wl_clip_to_file.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

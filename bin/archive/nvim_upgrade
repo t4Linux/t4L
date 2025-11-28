@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+echo -e "The file will be downloaded to your home directory"\n
+sleep 2
+cd $HOME
+if [ ! -d "$HOME/neovim" ]; then
+  git clone https://github.com/neovim/neovim
+fi
+cd $HOME/neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
+if [ ! -f $HOME/neovim/build/nvim-linux64.deb ]; then
+  echo "Error: The file  $HOME/neovim/build/nvim-linux64.deb was not created"
+  exit 1
+fi
+mv $HOME/neovim/build/nvim-linux-x86_64.deb $HOME/nvim-linux-x86_64.deb
+
+# Clean up only if the file was moved successfully
+if [ -f "$HOME/nvim-linux-x86_64.deb" ]; then
+  rm -rf "$HOME/neovim"
+fi

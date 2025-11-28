@@ -1,0 +1,14 @@
+[Unit]
+Description=File (v2h.txt) -> Host clipboard
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+ExecStartPre=/usr/bin/mkdir -p %h/HOST/files/clip
+ExecStartPre=/usr/bin/touch %h/HOST/files/clip/v2h.txt
+ExecStart=%h/.local/bin/file_to_host_clip.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

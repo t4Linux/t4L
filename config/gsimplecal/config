@@ -1,0 +1,13 @@
+[General]
+# mainwindow_position = mouse
+mainwindow_position = center    # lub none
+# mainwindow_xoffset   =  -360    # przesunięcie w lewo/prawo od środka ekranu
+mainwindow_yoffset   =  360     # przesunięcie w dół od środka (dla paska u góry)
+mainwindow_xoffset = 0
+show_week_numbers = 1
+force_lang = pl_PL.utf8
+# jeśli Waybar jest u góry ekranu:
+mainwindow_yoffset = 12     # dostosuj: ~ wysokość obramowania/odstępu paska
+
+# jeśli Waybar jest na dole ekranu, użyj lekkiego minusa:
+# mainwindow_yoffset = -12

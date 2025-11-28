@@ -1,0 +1,13 @@
+gui:
+  theme:
+    # Osaka-Jade
+    activeBorderColor:
+      - "#00C794"   # żywy jadeit
+      - bold
+    inactiveBorderColor:
+      - "#4A5F59"   # przygaszona zieleń/grey
+    selectedLineBgColor:
+      - "#0F2E2A"   # ciemny teal dla zaznaczenia
+    optionsTextColor:
+      - "#66E6C4"   # jaśniejszy jade dla tekstu opcji
+

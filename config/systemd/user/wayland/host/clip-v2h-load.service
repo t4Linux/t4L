@@ -1,0 +1,16 @@
+[Unit]
+Description=file (v2h.txt) -> HOST Wayland clipboard
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStartPre=/usr/bin/mkdir -p /home/donald/HOST/clip
+ExecStartPre=/usr/bin/touch /home/donald/HOST/clip/v2h.txt
+ExecStart=%h/.local/bin/file_to_host_wl_clip.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

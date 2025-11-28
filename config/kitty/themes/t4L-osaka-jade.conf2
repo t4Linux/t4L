@@ -1,0 +1,28 @@
+background #141a1b
+foreground #eeeeee
+cursor     #eeeeee
+cursor_text_color #eeeeee
+
+# normal colors
+color0  #141a1b
+color1  #cd3f45
+color2  #65BF99 
+color3  #e6cd69
+color4  #16a085
+color5  #a074c4
+color6  #55b5db
+color7  #a8f0c0
+
+# bright colors
+color8  #41535b
+color9  #cd3f45
+color10 #549e6a
+color11 #e6cd69
+color12 #16a085
+color13 #a074c4
+color14 #55b5db
+color15 #c8ffd8
+
+# opacity
+background_opacity 0.9
+

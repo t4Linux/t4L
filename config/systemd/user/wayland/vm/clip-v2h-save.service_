@@ -1,0 +1,14 @@
+[Unit]
+Description=VM clipboard -> file (v2h.txt)
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStart=%h/.local/bin/vm_clip_to_file.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+# Ścieżka do pliku z danymi ssh-agenta
+AGENT_ENV_FILE="$HOME/ssh-agent.env"
+
+# Uruchom ssh-agent, jeśli nie działa
+if ! pgrep -u "$USER" ssh-agent >/dev/null; then
+  ssh-agent > "$AGENT_ENV_FILE"
+fi
+
+# Załaduj zmienne środowiskowe agenta, jeśli nie są ustawione
+if [[ -z "$SSH_AUTH_SOCK" && -f "$AGENT_ENV_FILE" ]]; then
+  source "$AGENT_ENV_FILE" >/dev/null
+fi
+
+# Dodaj klucze SSH, jeśli jeszcze nie dodane
+for key in $HOME/.ssh/ed_homeLab $HOME/.ssh/ed_t4Linux; do
+  if [[ -f "$key" ]]; then
+    fingerprint=$(ssh-keygen -lf "$key" | awk '{print $2}')
+    if ! ssh-add -l 2>/dev/null | grep -q "$fingerprint"; then
+      ssh-add "$key"
+    fi
+  fi
+done

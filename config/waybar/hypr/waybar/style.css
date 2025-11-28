@@ -1,0 +1,140 @@
+@import "../omarchy/current/theme/waybar.css";
+
+* {
+  /* background-color: @background; */
+  /* background-color: transparent; */
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: CaskaydiaMono Nerd Font;
+  font-size: 12px;
+}
+/* osaca-jade kolorowanie dla custom-updates */
+#custom-updates {
+  font-size: 14px;
+  margin-left: 10px;
+}
+#custom-updates.green {
+  color: #CBE7DF;   /* default text */
+}
+#custom-updates.yellow {
+  color: #E6C07B;   /* warning */
+}
+#custom-updates.red {
+  color: #E06C75;   /* critical */
+}
+
+#custom-crypto {
+  padding: 0 8px;
+  font-weight: 600;
+  font-size: 13px;
+}
+#custom-crypto.up    { color: #8bd5a0; }  /* zielony */
+#custom-crypto.down  { color: #ed8796; }  /* czerwony */
+#custom-crypto.mixed { color: #e6e6e6; }  /* neutralny */
+
+
+/* WORKSPACES */
+/* URGENT – wymuś kolor samej ikonki/tekstu */
+#workspaces {
+  border-radius: 10px;                /* zaokrąglenie rogów */
+  padding: 0 5px;
+}
+#workspaces button.urgent {
+  color: #ff5c57;
+  border: 1px solid #ff5c57;
+  background: rgba(255, 92, 87, 0.15);
+  animation: urgent-pulse 0.9s ease-in-out infinite;
+}
+#workspaces button {
+  all: unset;
+  color: inherit;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+@keyframes urgent-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,77,77,0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(255,77,77,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,77,77,0); }
+}
+
+#workspaces button.urgent:not(.active) {
+  color: #ff4d4d;
+  animation: urgent-pulse 1.6s infinite;
+}
+
+window#waybar {
+    background: transparent;
+    color: white;
+}
+#window {
+    font-weight: bold;
+    font-family: "Ubuntu";
+}
+
+.modules-left {
+  background: rgba(30, 30, 30, 0.6);
+  border-radius: 10px;
+  padding: 2px 6px;
+  margin: 0 8px;
+}
+
+.modules-right {
+  background: rgba(30, 30, 30, 0.6);
+  border-radius: 10px;
+  padding: 2px 6px;
+  margin: 0 8px;
+}
+
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-omarchy,
+#custom-screenrecording-indicator,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+  padding: 0 1px;
+}
+
+#custom-expand-icon {
+  margin-right: 7px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  font-size: 14px;
+  margin-left: 8.75px;
+  margin-right: 10px; 
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 10px;
+}
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+

@@ -1,0 +1,12 @@
+[Unit]
+Description=Run rsync %I periodically
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=15m
+AccuracySec=1m
+Persistent=true
+Unit=rsync@%i.service
+
+[Install]
+WantedBy=timers.target

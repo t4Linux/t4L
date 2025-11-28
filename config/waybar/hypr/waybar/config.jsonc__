@@ -1,0 +1,183 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 26,
+  "margin": 3,
+  },
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock", "custom/update", "custom/screenrecording-indicator", "custom/updates"],
+  "modules-right": [
+    // "group/tray-expander",
+    "custom/crypto",
+    "tray",
+    "bluetooth",
+    "network",
+    "pulseaudio",
+    "cpu"
+    // "battery"
+  ],
+  "custom/updates": {
+    "hide-empty-text": true,
+    "exec": "~/.config/waybar/scripts/t4L-updates-checker.sh",
+    "interval": 180,
+    "return-type": "json",
+    "on-click": "~/.config/waybar/scripts/t4L-updates-launcher.sh",
+    "escape": true,
+    "signal": 1
+  },
+  "custom/crypto": {
+  // "exec": "LC_NUMERIC=en_US.UTF-8 printf '{\"text\":\"%'.0f\"}\\n' 395546",
+  "exec": "$HOME/.config/waybar/scripts/t4L-crypto3.sh",
+  "interval": 60,
+  "return-type": "json",
+  "format": "{text}",
+  // "tooltip": true,
+  // "on-click": "xdg-open https://www.tradingview.com/chart/?symbol=BINANCE:BTCUSDT",
+  // "on-click-right": "xdg-open https://www.tradingview.com/chart/?symbol=BINANCE:ETHUSDT",
+  "on-scroll-up":   "echo usd > ~/.cache/crypto-currency",
+  "on-scroll-down": "echo pln > ~/.cache/crypto-currency"
+  },
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "6": "1",
+      "7": "2",
+      "8": "3",
+      "9": "4",
+      "10": "5",
+      "1": "I",
+      "2": "II",
+      "3": "III",
+      "4": "IV",
+      "5": "V",
+      "urgent": "<span foreground='#ff4d4d'>󰵙</span>",
+      "active": "󱓻"
+    },
+    "persistent-workspaces": {
+      "DP-2": [6, 7, 8, 9, 10],
+      "DP-1": [1, 2, 3, 4, 5]
+    // "1": ["DP-2"],
+    // "2": ["DP-2"],
+    // "3": ["DP-2"],
+    // "4": ["DP-2"],
+    // "5": ["DP-2"],
+    // "6": ["DP-1"],
+    // "7": ["DP-1"],
+    // "8": ["DP-1"],
+    // "9": ["DP-1"],
+    // "10": ["DP-1"]
+    },
+    "sort-by": "monitor"
+    // "sort-by-number": true
+  },
+  "custom/update": {
+    "format": "",
+    "exec": "omarchy-update-available",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
+    "tooltip-format": "Omarchy update available",
+    "signal": 7,
+    "interval": 3600
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "$TERMINAL -e btop"
+  },
+  "clock": {
+    "format": "{:L%A %H:%M}",
+    "format-alt": "{:L%d %B %Y W-%V}",
+    "tooltip": false,
+    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "Disconnected ⚠",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\nup: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    // "on-click": "~/.config/ml4w/settings/networkmanager.sh",
+    "on-click-right": "~/.local/bin/nm-applet.sh toggle",
+  },
+  // "network": {
+  //   "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+  //   "format": "{icon}",
+  //   "format-wifi": "{icon}",
+  //   "format-ethernet": "󰀂",
+  //   "format-disconnected": "󰤮",
+  //   "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+  //   "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+  //   "tooltip-format-disconnected": "Disconnected",
+  //   "interval": 3,
+  //   "spacing": 1,
+  //   "on-click": "omarchy-launch-wifi"
+  // },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "interval": 5,
+    "on-click": "omarchy-menu power",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "blueberry"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "on-click": "$TERMINAL --class=Wiremix -e wiremix",
+    "on-click-right": "pamixer -t",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+  // "group/tray-expander": {
+  //   "orientation": "inherit",
+  //   "drawer": {
+  //     "transition-duration": 600,
+  //     "children-class": "tray-group-item"
+  //   },
+  //   "modules": ["custom/expand-icon", "tray"]
+  // },
+  // "custom/expand-icon": {
+  //   "format": " ",
+  //   "tooltip": false
+  // },
+  "custom/screenrecording-indicator": {
+    "on-click": "omarchy-cmd-screenrecord",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
+    "signal": 8,
+    "return-type": "json"
+  },
+  "tray": {
+    "icon-size": 14,
+    "spacing": 12,
+    // "show-passive-items": true
+  }
+}

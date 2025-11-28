@@ -1,0 +1,76 @@
+os:
+  edit: "lvim {{filename}}"
+  editAtLine: "lvim --line={{line}} {{filename}}"
+  editAtLineAndWait: "lvim --block --line={{line}} {{filename}}"
+  editInTerminal: true
+  openDirInEditor: "lvim {{dir}}"
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
+      # externalDiffCommand: "--ignore-all-space"
+  # branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
+gui:
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - "#00C794" # żywy jadeit (aktywny element)
+      - bold
+    inactiveBorderColor:
+      - "#4A5F59" # przygaszona zieleń/grey (nieaktywny)
+    optionsTextColor:
+      - "#66E6C4" # jasny jade (napisy opcji)
+    selectedLineBgColor:
+      - "#0F2E2A" # tło zaznaczonej linii
+    selectedRangeBgColor:
+      - "#123B35" # tło dla zaznaczonego zakresu (commit range)
+    cherryPickedCommitBgColor:
+      - "#123B35" # tło dla commitów cherry-pick
+    cherryPickedCommitFgColor:
+      - "#00C794" # tekst commitów cherry-pick
+    unstagedChangesColor:
+      - "#E6C700" # złoto dla niezatwierdzonych zmian
+    defaultFgColor:
+      - "#C9F0E6" # domyślny kolor tekstu (jasny jade) # showIcons: true
+  # theme:
+  #   selectedLineBgColor:
+  #     - default
+  #   selectedRangeBgColor:
+  #     - default
+  # authorColors:
+  #   'John Smith': 'red' # use red for John Smith
+  #   'Alan Smithee': '#00ff00' # use green for Alan Smithee
+  #  use blue for other authors
+  # '*': '#0000ff'
+  # branchColors:
+  #   'main': '#11aaff' # use a light blue for branches beginning with 'docs/'
+  # nerdFontsVersion: "3"
+  authorColors:
+    "Samuel Bubienko": "#FFF633" # use red for John Smith
+    "Mateusz Kiszka": "#FFF633" # use red for John Smith
+    "artur.chmur": "#FFF633" # use red for John Smith'yellow' # use red for John Smith
+    "Artur Chmur": "#FFF633" # use red for John Smith'yellow' # use red for John Smith
+    "Krystian Rygiel": "#FFFFFF"
+  #   'Alan Smithee': '#00ff00' # use green for Alan Smithee
+  #  use blue for other authors
+  # '*': '#0000ff'
+  branchColors:
+    "main": "#11aaff" # use a light blue for branches beginning with 'docs/'
+    "master": "#11aaff" # use a light blue for branches beginning with 'docs/'
+    "staging": "#36C84A"
+    "dev": "#FC29E3"
+    "scrum": "#FCB829"
+    "develop": "#36C84A"
+    "art": "#FAFC29"
+  nerdFontsVersion: "3"
+customCommands:
+  - key: "<c-y>"
+    context: "commits"
+    description: "Show commit (ignore whitespace)"
+    command: "git show -w {{.SelectedLocalCommit.Hash}} | delta"
+    output: terminal
+  - key: "<c-t>"
+    context: "commits"
+    description: "Show commit (ignore whitespace) in Zellij split"
+    command: 'zellij run --floating -- bash -lc ''git show -w {{.SelectedLocalCommit.Hash}} | delta; echo; read -rp "[enter] zamyka panel…" _'''
+    output: terminal

@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount virtiofs for /home/dd/HOST/repos
+Requires=local-fs.target
+After=local-fs.target
+
+[Mount]
+What=repos
+Where=/home/dd/HOST/repos
+Type=virtiofs
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target 

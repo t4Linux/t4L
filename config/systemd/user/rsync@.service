@@ -1,0 +1,8 @@
+[Unit]
+Description=Generic rsync mirror %I
+ConditionPathExists=%h/.config/rsync/%i.env
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/rsync/%i.env
+ExecStart=/usr/bin/bash -lc 'set -euxo pipefail; : "${SRC:?missing SRC}"; : "${DST:?missing DST}"; echo "rsync from $SRC to $DST"; /usr/bin/mkdir -p "$DST"; exec /usr/bin/flock -n /tmp/rsync-%i.lock /usr/bin/rsync -avh --delete --exclude=/.stfolder/ --exclude=/.git/ --exclude=/.gitignore "$SRC/" "$DST/"'

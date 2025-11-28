@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Ścieżka do katalogu, w którym znajduje się ten skrypt
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Katalog docelowy na linki
+TARGET_DIR="$HOME/.local/bin"
+
+# Upewnij się, że katalog docelowy istnieje
+mkdir -p "$TARGET_DIR"
+
+# Iteruj po plikach t4L-*.sh znajdujących się w tym samym katalogu co skrypt
+for file in "$SCRIPT_DIR"/t4L-*.sh; do
+    # Sprawdź, czy plik istnieje (na wypadek, gdyby wzorzec nie pasował do niczego)
+    if [[ -f "$file" ]]; then
+        filename=$(basename "$file")
+        ln -sf "$file" "$TARGET_DIR/$filename"
+        echo "Utworzono link: $TARGET_DIR/$filename -> $file"
+    fi
+done

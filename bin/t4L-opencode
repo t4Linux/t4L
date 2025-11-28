@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Nazwa: open-project
+# Cel: Otwiera nowe okno terminala Kitty w predefiniowanym katalogu projektu.
+# Użycie: ./open-project [nazwa_projektu]
+#
+# Ta wersja skryptu NIE wymaga włączonej opcji 'allow_remote_control'
+# w kitty.conf. Zawsze otwiera nową, niezależną instancję Kitty.
+# Domyślna powłoka w nowym oknie to ZSH.
+#
+
+set -e # Zatrzymaj skrypt w przypadku błędu
+
+# --- Konfiguracja ---
+# Dodaj tutaj swoje projekty, mapując skrót na pełną ścieżkę
+declare -A PROJECTS
+PROJECTS=(
+  ["PLK"]="$HOME/Work/JDG/PLK/ChatGPT"
+  ["tmp"]="$HOME/Xanadu/tmp"
+  ["ai"]="$HOME/Xanadu/AI"
+)
+
+# --- Główna funkcja ---
+main() {
+  local project_key="$1"
+
+  # 1. Sprawdź, czy podano argument
+  if [[ -z "$project_key" ]]; then
+    echo "Błąd: Nie podano nazwy projektu." >&2
+    print_usage
+    exit 1
+  fi
+
+  # 2. Sprawdź, czy projekt istnieje w konfiguracji
+  local target_dir="${PROJECTS[$project_key]}"
+  if [[ -z "$target_dir" ]]; then
+    echo "Błąd: Nieznany projekt '$project_key'." >&2
+    print_usage
+    exit 1
+  fi
+
+  # 3. Sprawdź, czy katalog docelowy istnieje fizycznie
+  if [[ ! -d "$target_dir" ]]; then
+    echo "Błąd: Katalog docelowy dla '$project_key' nie istnieje:" >&2
+    echo "  $target_dir" >&2
+    exit 1
+  fi
+
+  # Polecenie do wykonania w nowym terminalu
+  local command_to_run="opencode; exit"
+
+  # 4. Uruchom nową instancję Kitty w docelowym katalogu
+  echo "Info: Uruchamiam Kitty w katalogu '$target_dir' z ZSH..."
+  kitty --title "$project_key" --directory "$target_dir" bash -c "$command_to_run"
+}
+
+# --- Funkcja pomocnicza ---
+print_usage() {
+  echo "Użycie: $0 [nazwa_projektu]"
+  echo "Dostępne projekty:"
+  for key in "${!PROJECTS[@]}"; do
+    echo "  - $key"
+  done
+}
+
+# --- Uruchomienie ---
+main "$@"

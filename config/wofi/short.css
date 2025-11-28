@@ -1,0 +1,52 @@
+/* osaca-jade — short (Clear/Cancel dialog, spójny z globalnym) */
+* {
+  font-family: "CaskaydiaMono Nerd Font", "JetBrains Mono", monospace;
+  font-size: 10pt;
+  color: #CBE7DF;
+}
+
+window {
+  background-color: rgba(26, 42, 40, 0.65);
+  border: 1px solid #1B2A2F;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+#outer-box {
+  background: transparent;
+  padding: 2px;
+}
+
+#input { 
+  display: none; /* ukrywamy input w trybie dialogowym */
+}
+
+#inner-box {
+  background-color: rgba(15, 21, 24, 0.25);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+#entry {
+  padding: 6px 8px;
+  margin: 2px 4px;
+  border-radius: 8px;
+  background: transparent;
+}
+
+#entry:selected {
+  background-color: rgba(18, 60, 51, 0.25);
+  outline: 1px solid #2BBD8E;
+  color: #CBE7DF;
+}
+
+#text { color: inherit; }
+
+#prompt {
+  color: #8FBFB3;
+  margin-left: 6px;
+}
+
+scrollbar, scrollbar * { min-width: 8px; min-height: 8px; }
+scrollbar slider { background: #1B2A2F; border-radius: 6px; }
+scrollbar slider:hover { background: #2BBD8E; }

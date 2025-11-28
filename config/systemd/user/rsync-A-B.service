@@ -1,0 +1,5 @@
+ [Unit]
+ Description=Mirror A->B
+ [Service]
+ Type=oneshot
+ ExecStart=/usr/bin/flock -n /tmp/rsync-A-B.lock /usr/bin/rsync -a --delete "/home/donald/.t4L/" "/home/donald/Xanadu/BACKUP/t4L"

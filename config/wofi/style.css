@@ -1,0 +1,76 @@
+/* osaca-jade — global Wofi theme (transparent 0.85, compact, works for drun & dmenu) */
+* {
+  font-family: "CaskaydiaMono Nerd Font", "JetBrains Mono", monospace;
+  font-size: 10pt;
+  color: #CBE7DF;
+}
+
+/* Główne okno */
+window {
+  background-color: rgba(26, 42, 40, 0.65);
+  /* background-color: rgba(11, 17, 20, 0.85); /* ~0.85 opacity */ */
+  border: 1px solid #1B2A2F;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+#outer-box {
+  background: transparent;
+  padding: 2px;
+}
+
+/* Pasek wyszukiwania / prompt (dla dmenu i drun) */
+#input {
+  margin: 6px 6px 8px 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #1B2A2F;
+  background-color: rgba(15, 21, 24, 0.65);
+  color: #CBE7DF;
+}
+
+#input:focus {
+  border-color: #2BBD8E;
+  box-shadow: 0 0 0 1px rgba(43,189,142,0.20);
+}
+
+/* Kontener listy */
+#inner-box {
+  background-color: rgba(15, 21, 24, 0.25);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Pozycje listy (app entries lub dmenu entries) */
+#entry {
+  padding: 6px 8px;
+  margin: 2px 4px;
+  border-radius: 8px;
+  background: transparent;
+}
+
+#entry:selected {
+  background-color: rgba(18, 60, 51, 0.25); /* jade selection */
+  outline: 1px solid #2BBD8E;
+  color: #CBE7DF;
+}
+
+#text { color: inherit; }
+
+/* Ikony app-ek (drun) */
+#img {
+  margin-right: 8px;
+  border-radius: 6px;
+}
+
+/* Prompt label */
+#prompt {
+  color: #8FBFB3;
+  margin-left: 6px;
+}
+
+/* Scrollbar */
+scrollbar, scrollbar * { min-width: 8px; min-height: 8px; }
+scrollbar slider { background: #1B2A2F; border-radius: 6px; }
+scrollbar slider:hover { background: #2BBD8E; }
+

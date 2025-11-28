@@ -1,0 +1,18 @@
+[Unit]
+Description=Host Wayland clipboard -> files (h2v.txt/bin/mime)
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionPathExistsGlob=%t/wayland-*
+
+[Service]
+Environment=XDG_RUNTIME_DIR=%t
+ExecStartPre=/usr/bin/mkdir -p /home/donald/Work/PLK/files/clip
+ExecStartPre=/usr/bin/touch /home/donald/Work/PLK/files/clip/h2v.txt
+ExecStartPre=/usr/bin/touch /home/donald/Work/PLK/files/clip/h2v.bin
+ExecStartPre=/usr/bin/touch /home/donald/Work/PLK/files/clip/h2v.mime
+ExecStart=%h/.local/bin/host_clip_to_file.sh
+Restart=always
+RestartSec=0.5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+updates=$(apt list --upgradable 2>/dev/null | grep -c upgradable)
+fupdates=$(flatpak remote-ls --updates | wc -l)
+
+if [ "$updates" -gt 0 ] && [ "$fupdates" -gt 0 ]; then
+	echo "" $updates "" $fupdates
+elif [ "$updates" -gt 0 ] && [ "$fupdates" -lt 1 ]; then
+ 	echo " $updates"
+elif [ "$updates" -lt 1 ] && [ "$fupdates" -gt 0 ]; then
+ 	echo "  $fupdates"
+else
+ 	echo ""
+fi
